@@ -16,12 +16,14 @@ const RegisterForm = ({ className, ...props }: any) => {
   )
   return (
     <div className={cn('grid gap-6', className)} {...props}>
-      <h1 className="text-2xl font-semibold tracking-tight">
-        Create an account
-      </h1>
-      <p className="text-sm text-muted-foreground text-center">
-        Please enter your details below to create your account.
-      </p>
+      <div>
+        <h1 className="text-2xl font-semibold tracking-tight">
+          Create an account
+        </h1>
+        <p className="text-sm text-muted-foreground text-center">
+          Please enter your details below to create your account.
+        </p>
+      </div>
       <form className="space-y-2">
         <div className="grid gap-2 text-left">
           <StepOne />
