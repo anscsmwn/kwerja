@@ -16,42 +16,43 @@ const RegisterForm = ({ className, ...props }: any) => {
   )
   return (
     <div className={cn('grid gap-6', className)} {...props}>
-      <p className="text-sm text-muted-foreground text-center">
-        Please enter your details below to create your account.
-      </p>
       <div>
-        <form className="space-y-2">
-          <div className="grid gap-2 text-left">
-            <div className="grid gap-2">
-              <StepOne />
-              <StepTwo />
-            </div>
-          </div>
-          <div className="grid gap-4">
-            <Button
-              onClick={() => {
-                if (step !== 2) {
-                  nextStep()
-                }
-              }}
-              type="button"
-              disabled={step === 2 && !passwordRequirements.metAllRequirements}
-            >
-              {step === 2 ? 'Register' : 'Next'}
-            </Button>
-            <Button
-              onClick={() => {
-                prevStep()
-              }}
-              type="button"
-              variant="outline"
-              className={cn({ hidden: step === 1 })}
-            >
-              Previous
-            </Button>
-          </div>
-        </form>
+        <h1 className="text-2xl font-semibold tracking-tight">
+          Create an account
+        </h1>
+        <p className="text-sm text-muted-foreground text-center">
+          Please enter your details below to create your account.
+        </p>
       </div>
+      <form className="space-y-2">
+        <div className="grid gap-2 text-left">
+          <StepOne />
+          <StepTwo />
+        </div>
+        <div className="grid gap-4">
+          <Button
+            onClick={() => {
+              if (step !== 2) {
+                nextStep()
+              }
+            }}
+            type="button"
+            disabled={step === 2 && !passwordRequirements.metAllRequirements}
+          >
+            {step === 2 ? 'Register' : 'Next'}
+          </Button>
+          <Button
+            onClick={() => {
+              prevStep()
+            }}
+            type="button"
+            variant="outline"
+            className={cn({ hidden: step === 1 })}
+          >
+            Previous
+          </Button>
+        </div>
+      </form>
     </div>
   )
 }
