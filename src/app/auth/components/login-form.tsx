@@ -7,10 +7,12 @@ import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 interface LoginFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 const LoginForm = ({ className, ...props }: LoginFormProps) => {
+  const router = useRouter()
   const [form, setForm] = useState({
     email: '',
     password: '',
@@ -73,10 +75,14 @@ const LoginForm = ({ className, ...props }: LoginFormProps) => {
               </span>
             </div>
           </div>
-          <Button type="button" variant="outline">
-            <Link className="w-full" href="/auth/register">
-              Create account
-            </Link>
+          <Button
+            onClick={() => {
+              router.push('/auth/register')
+            }}
+            type="button"
+            variant="outline"
+          >
+            Create account
           </Button>
         </div>
       </form>
