@@ -4,7 +4,7 @@ import { faker } from '@faker-js/faker'
 
 import { labels, priorities, statuses } from './data'
 
-const outputDirectory = path.join(__dirname, 'output')
+const outputDirectory = path.join(__dirname, 'data')
 const outputPath = path.join(outputDirectory, 'tasks.json')
 // Check if the output directory exists, and create it if it doesn't.
 if (!fs.existsSync(outputDirectory)) {
@@ -23,5 +23,4 @@ const tasks = Array.from({ length: 100 }, () => ({
 }))
 
 fs.writeFileSync(outputPath, JSON.stringify(tasks, null, 2))
-console.log(outputPath)
-console.log('✅ Tasks data generated.')
+console.log(`✅ Tasks data generated at ${outputPath}.`)
