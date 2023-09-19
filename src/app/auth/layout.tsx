@@ -1,11 +1,14 @@
 import React from 'react'
-import { headers } from 'next/headers'
 import Link from 'next/link'
 
 import { cn } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
-
+import { headers } from 'next/headers'
 const AuthLayout = ({ children }: any) => {
+  const headersList = headers()
+  // read the custom x-url header
+  const header_url = headersList.get('x-url') || ''
+  const isLogin = header_url.includes('login')
   return (
     <div className="container relative min-h-screen flex-col items-center justify-center pt-20 md:grid md:pt-0 lg:max-w-none lg:grid-cols-2 lg:px-0">
       <Link
@@ -13,6 +16,7 @@ const AuthLayout = ({ children }: any) => {
         className={cn(
           buttonVariants({ variant: 'ghost' }),
           'absolute right-4 top-4 md:right-8 md:top-8',
+          isLogin ? 'hidden' : '',
         )}
       >
         Login
@@ -47,12 +51,7 @@ const AuthLayout = ({ children }: any) => {
       </div>
       <div className="lg:p-8">
         <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
-          <div className="flex flex-col space-y-2 text-center">
-            <h1 className="text-2xl font-semibold tracking-tight">
-              Create an account
-            </h1>
-            {children}
-          </div>
+          <div className="flex flex-col space-y-2 text-center">{children}</div>
 
           <p className="px-8 text-center text-sm text-muted-foreground">
             By clicking continue, you agree to our{' '}
