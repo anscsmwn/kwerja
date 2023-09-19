@@ -5,7 +5,9 @@ const LayoutAdmin = ({ children }: any) => {
   return (
     <>
       <SiteHeader />
-      <div className="sm:container px-4 py-2 relative">{children}</div>
+      <div className="sm:container px-4 py-2 relative overflow-hidden">
+        {children}
+      </div>
     </>
   )
 }
