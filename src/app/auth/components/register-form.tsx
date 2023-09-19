@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
@@ -10,7 +10,7 @@ import { Label } from '@/components/ui/label'
 import useRegisterStore from '@/store/useRegisterStore'
 
 const RegisterForm = ({ className, ...props }: any) => {
-  const { step, nextStep, prevStep } = useRegisterStore()
+  const { step, nextStep, prevStep, passwordRequirements } = useRegisterStore()
   const [state, setState] = useState<'idle' | 'loading' | 'success' | 'error'>(
     'idle',
   )
@@ -35,6 +35,7 @@ const RegisterForm = ({ className, ...props }: any) => {
                 }
               }}
               type="button"
+              disabled={step === 2 && !passwordRequirements.metAllRequirements}
             >
               {step === 2 ? 'Register' : 'Next'}
             </Button>
@@ -107,7 +108,9 @@ const StepOne = () => {
   )
 }
 const StepTwo = () => {
-  const { form, setForm, step } = useRegisterStore()
+  const { form, setForm, step, passwordRequirements, setPassword } =
+    useRegisterStore()
+
   return (
     <>
       {step === 2 && (
@@ -135,7 +138,7 @@ const StepTwo = () => {
             autoCorrect="off"
             disabled={false}
             onChange={(e) => {
-              setForm({ ...form, password: e.target.value })
+              setPassword(e.target.value)
             }}
             value={form.password}
           />
@@ -152,6 +155,41 @@ const StepTwo = () => {
             }}
             value={form.confirm_password}
           />
+          <div className="mt-1">
+            <p className="text-sm">Password Requirement:</p>
+            <ul className="text-xs">
+              <ul className="text-xs">
+                <li
+                  className={
+                    passwordRequirements.length ? 'text-green-500' : ''
+                  }
+                >
+                  At least 8 characters
+                </li>
+                <li
+                  className={
+                    passwordRequirements.uppercase ? 'text-green-500' : ''
+                  }
+                >
+                  At least 1 uppercase character
+                </li>
+                <li
+                  className={
+                    passwordRequirements.lowercase ? 'text-green-500' : ''
+                  }
+                >
+                  At least 1 lowercase character
+                </li>
+                <li
+                  className={
+                    passwordRequirements.number ? 'text-green-500' : ''
+                  }
+                >
+                  At least 1 numeric character
+                </li>
+              </ul>
+            </ul>
+          </div>
         </>
       )}
     </>
