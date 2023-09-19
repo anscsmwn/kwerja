@@ -158,7 +158,7 @@ export default function DashboardPage() {
                         buttonVariants({ variant: 'default' }),
                         'w-full mt-6',
                       )}
-                      href="/admin/members"
+                      href="/admin/employees"
                     >
                       See More
                     </Link>
