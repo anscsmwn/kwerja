@@ -1,14 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
-
-import { cn } from '@/lib/utils'
-import { buttonVariants } from '@/components/ui/button'
-import { headers } from 'next/headers'
 import LinkLogin from './components/link-login'
 const AuthLayout = ({ children }: any) => {
-  const headersList = headers()
-  // read the custom x-url header
-
   return (
     <div className="container relative min-h-screen flex-col items-center justify-center pt-20 md:grid md:pt-0 lg:max-w-none lg:grid-cols-2 lg:px-0">
       <LinkLogin />
